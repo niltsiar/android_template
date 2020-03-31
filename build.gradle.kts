@@ -49,14 +49,14 @@ allprojects {
     }
 }
 
-//Configuration for gradle-versions-plugin to avoid non-release versions
-//to run: gradlew dependencyUpdates
+// Configuration for gradle-versions-plugin to avoid non-release versions
+// to run: gradlew dependencyUpdates
 tasks {
     "dependencyUpdates"(com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask::class) {
         resolutionStrategy {
             componentSelection {
                 all {
-                    //val rejected = listOf("alpha", "beta", "rc", "cr", "m", "preview")
+                    // val rejected = listOf("alpha", "beta", "rc", "cr", "m", "preview")
                     val rejected = listOf("alpha", "cr", "m", "preview")
                         .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
                         .any { it.matches(candidate.version) }
