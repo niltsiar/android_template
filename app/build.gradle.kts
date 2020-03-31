@@ -1,15 +1,15 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    id(Plugins.android)
+    id(Plugins.kotlinAndroid)
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(Versions.targetSdk)
 
     defaultConfig {
         applicationId = "dev.niltsiar.template"
-        minSdkVersion(26)
-        targetSdkVersion(29)
+        minSdkVersion(Versions.minSdk)
+        targetSdkVersion(Versions.targetSdk)
         versionCode = 1
         versionName = "1.0"
 
@@ -25,10 +25,9 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.3.71")
-    implementation("androidx.core:core-ktx:1.1.0")
-    implementation("androidx.appcompat:appcompat:1.1.0")
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    implementation(Libs.kotlinStdlib)
+    implementation(Libs.coreKtx)
+    implementation(Libs.appCompat)
+
+    testImplementation(Tests.junit)
 }
