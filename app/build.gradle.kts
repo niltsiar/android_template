@@ -23,6 +23,8 @@ android {
         versionCode = appVersionCode
         versionName = appVersionName
 
+        base.archivesBaseName += "-$appVersionName"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,6 +40,7 @@ android {
             it.java.srcDir("src/${it.name}/kotlin")
         }
     }
+
     compileOptions {
         sourceCompatibility = Versions.sourceCompatibility
         targetCompatibility = Versions.targetCompatibility
