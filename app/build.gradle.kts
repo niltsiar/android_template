@@ -3,6 +3,16 @@ plugins {
     id(Plugins.kotlinAndroid)
 }
 
+val VERSION_MAJOR: String by project
+val VERSION_MINOR: String by project
+val VERSION_PATCH: String by project
+val versionMajor = VERSION_MAJOR.toInt()
+val versionMinor = VERSION_MINOR.toInt()
+val versionPatch = VERSION_PATCH.toInt()
+
+val appVersionCode = versionMajor * 1_000_000 + versionMinor * 1_000 + versionPatch
+val appVersionName = "$versionMajor.$versionMinor.$versionPatch"
+
 android {
     compileSdkVersion(Versions.targetSdk)
 
@@ -10,8 +20,8 @@ android {
         applicationId = "dev.niltsiar.template"
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = appVersionCode
+        versionName = appVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
