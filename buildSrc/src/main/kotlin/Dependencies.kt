@@ -10,6 +10,7 @@ object Plugins {
     const val gradleVersions = "com.github.ben-manes.versions"
     const val navigationKotlin = "androidx.navigation.safeargs.kotlin"
     const val googleServices = "com.google.gms.google-services"
+    const val spotless = "com.diffplug.gradle.spotless"
 }
 
 object Versions {
@@ -18,6 +19,8 @@ object Versions {
     const val androidGradlePlugin = "3.6.1"
     const val gradleVersions = "0.28.0"
     const val googleServices = "4.3.3"
+    const val spotless = "3.28.0"
+    const val ktlint = "0.36.0"
 
     const val minSdk = 26
     const val targetSdk = 29
@@ -60,6 +63,7 @@ object BuildTools {
     const val gradleVersions = "com.github.ben-manes:gradle-versions-plugin:${Versions.gradleVersions}"
     const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
     const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
+    const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.spotless}"
 }
 
 object Libs {
