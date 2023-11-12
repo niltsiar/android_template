@@ -3,15 +3,11 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 sourceSets {
     getByName("main") {
         java.srcDir("src/main/kotlin")
     }
-}
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
 }

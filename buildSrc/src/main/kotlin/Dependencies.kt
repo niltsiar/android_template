@@ -10,23 +10,23 @@ object Plugins {
     const val gradleVersions = "com.github.ben-manes.versions"
     const val navigationKotlin = "androidx.navigation.safeargs.kotlin"
     const val googleServices = "com.google.gms.google-services"
-    const val spotless = "com.diffplug.gradle.spotless"
+    const val spotless = "com.diffplug.spotless"
 }
 
 object Versions {
-    const val kotlin = "1.3.71"
-    const val coroutines = "1.3.5"
-    const val androidGradlePlugin = "3.6.1"
-    const val gradleVersions = "0.28.0"
+    const val kotlin = "1.9.20"
+    const val coroutines = "1.6.3"
+    const val androidGradlePlugin = "8.1.3"
+    const val gradleVersions = "0.49.0"
     const val googleServices = "4.3.3"
-    const val spotless = "3.28.0"
+    const val spotless = "6.22.0"
     const val ktlint = "0.36.0"
 
     const val minSdk = 26
     const val targetSdk = 29
 
-    val sourceCompatibility = JavaVersion.VERSION_1_8
-    val targetCompatibility = JavaVersion.VERSION_1_8
+    val sourceCompatibility = JavaVersion.VERSION_11
+    val targetCompatibility = JavaVersion.VERSION_11
 
     const val appCompat = "1.1.0"
     const val coreKtx = "1.2.0"

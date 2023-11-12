@@ -7,13 +7,12 @@ plugins {
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath(BuildTools.androidGradlePlugin)
         classpath(BuildTools.kotlinGradlePlugin)
         classpath(BuildTools.gradleVersions)
-        classpath(BuildTools.spotless)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,7 +22,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
