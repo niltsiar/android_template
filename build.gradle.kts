@@ -1,43 +1,32 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id(Plugins.gradleVersions) version Versions.gradleVersions
-    id(Plugins.spotless) version Versions.spotless
-}
-
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath(BuildTools.androidGradlePlugin)
-        classpath(BuildTools.kotlinGradlePlugin)
-        classpath(BuildTools.gradleVersions)
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.ben.manes.versions)
+    alias(libs.plugins.spotless)
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+            freeCompilerArgs = listOf("-Xcontext-receivers")
+        }
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = Versions.targetCompatibility.toString()
-    }
-
-    apply(plugin = Plugins.spotless)
+    apply(plugin = "com.diffplug.spotless")
     spotless {
         kotlin {
             target("**/*.kt")
-            ktlint(Versions.ktlint)
+            ktlint(libs.versions.ktlint.get())
         }
         kotlinGradle {
             target("**/*.gradle.kts")
-            ktlint(Versions.ktlint)
+            ktlint(libs.versions.ktlint.get())
         }
         java {
             target("**/*.java")
@@ -46,24 +35,19 @@ allprojects {
             endWithNewline()
         }
     }
-}
 
-// Configuration for gradle-versions-plugin to avoid non-release versions
-// to run: gradlew dependencyUpdates
-tasks {
-    "dependencyUpdates"(com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask::class) {
-        resolutionStrategy {
-            componentSelection {
-                all {
-                    // val rejected = listOf("alpha", "beta", "rc", "cr", "m", "preview")
-                    val rejected = listOf("alpha", "cr", "m", "preview")
-                        .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
-                        .any { it.matches(candidate.version) }
-                    if (rejected) {
-                        reject("Release candidate")
-                    }
-                }
-            }
+    // https://github.com/ben-manes/gradle-versions-plugin
+    fun isNonStable(version: String): Boolean {
+        val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
+        val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+        val isStable = stableKeyword || regex.matches(version)
+        return isStable.not()
+    }
+
+    // disallow release candidates as upgradable versions from stable versions
+    tasks.withType<DependencyUpdatesTask>().configureEach {
+        rejectVersionIf {
+            isNonStable(candidate.version) && !isNonStable(currentVersion)
         }
     }
 }
