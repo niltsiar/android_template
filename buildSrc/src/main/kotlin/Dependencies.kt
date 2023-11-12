@@ -22,8 +22,8 @@ object Versions {
     const val spotless = "6.22.0"
     const val ktlint = "0.36.0"
 
-    const val minSdk = 26
-    const val targetSdk = 29
+    const val minSdk = 30
+    const val targetSdk = 34
 
     val sourceCompatibility = JavaVersion.VERSION_11
     val targetCompatibility = JavaVersion.VERSION_11

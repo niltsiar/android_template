@@ -14,15 +14,15 @@ val appVersionCode = versionMajor * 1_000_000 + versionMinor * 1_000 + versionPa
 val appVersionName = "$versionMajor.$versionMinor.$versionPatch"
 
 android {
-    compileSdkVersion(Versions.targetSdk)
+    compileSdk = Versions.targetSdk
 
     namespace = "dev.niltsiar.template"
 
     defaultConfig {
         applicationId = "dev.niltsiar.template"
 
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
+        minSdk = Versions.minSdk
+        targetSdk = Versions.targetSdk
         versionCode = appVersionCode
         versionName = appVersionName
 
